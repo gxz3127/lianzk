@@ -1,1 +1,34 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><link rel="stylesheet" href="./css/style.css"><link rel="stylesheet" href="./icon/iconfont.css"><title>Document</title></head><body><script>document.documentElement.style.fontSize=window.innerWidth/1008*100+"px";</script><div class="wrap"></div></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><link rel="stylesheet" href="./css/style.css"><link rel="stylesheet" href="./icon/iconfont.css"><title>Document</title></head><body><script>document.documentElement.style.fontSize=window.innerWidth/1008*100+"px";</script><script src="js/jquery.min.js"></script><script>$(function(){
+               $.ajax({
+                   url:"/list", 
+                   success:function(res){
+                       console.log(res)
+                       var data=JSON.parse(res).list; 
+                       console.log(data) 
+                       var str="";
+                       for(var i=0;i<data.length;i++){
+                           str+=`
+                                <div class="nei">
+                                <b><img src="${data[i].img}" alt=""></b>
+                                <span>
+                                        <h1>${data[i].text}</h1>
+                                        <u>￥ 2200 </u>
+                                        <i>7户合租 | 朝东-次卧 | 15M</i>
+                                        <em>浦东-北蔡</em>
+                                        <h4>
+                                            <a href="#">新上架</a>
+                                            <a href="#">独卫</a>
+                                            <a href="#">独立厨房</a> 
+                                            <a href="#">今天发</a>
+                                        </h4>
+                                </span>
+                            </div>
+                           `
+                       }
+                    $(".box").html(str);
+                   },
+                   error:function(error){
+                       console.warn(error)
+                   }
+               })
+           })</script><div class="wrap"><header><b class="iconfont">&#xe648;</b> <i>上海</i> <u class="iconfont">&#xe6e3;</u> <em><span class="iconfont">&#xe729;</span> <input type="text" placeholder="输入区域，小区搜索房源"> </em><a href="#" class="iconfont">&#xe647;</a></header><section><ul><li><i>位置</i> <b class="iconfont">&#xe650;</b></li><li><i>租金</i> <b class="iconfont">&#xe650;</b></li><li><i>合租</i> <b class="iconfont">&#xe650;</b></li><li><i>更多</i> <b class="iconfont">&#xe650;</b></li></ul><div class="box"></div></section><footer></footer></div></body></html>

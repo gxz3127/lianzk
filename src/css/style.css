@@ -20,9 +20,114 @@ b {
 html, body, .wrap {
   width: 100%;
   height: 100%;
+  font-size: .4rem;
 }
 
 .wrap {
   display: flex;
   flex-direction: column;
+}
+
+header {
+  height: 1.2rem;
+  background: #EE3841;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #fff;
+}
+
+header u {
+  color: #fff;
+}
+
+header a {
+  color: #fff;
+}
+
+header em {
+  width: 55%;
+  height: .81rem;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+header em input {
+  width: 80%;
+  border: none;
+  outline: none;
+  font-size: .15rem;
+  color: #E0E0E0;
+}
+
+header em span {
+  color: #D9D9D9;
+}
+
+section {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+section ul {
+  display: flex;
+}
+
+section ul li {
+  height: 1.19rem;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: .05rem solid #EDEEED;
+}
+
+section ul li b {
+  margin-left: .15rem;
+  font-size: 0.1rem !important;
+}
+
+section ul li:nth-child(3) {
+  color: red;
+}
+
+section .box {
+  display: flex;
+  flex-direction: column;
+}
+
+section .box .nei {
+  display: flex;
+  padding: .42rem .35rem;
+  border-bottom: .05rem solid #EDEEED;
+}
+
+section .box .nei b {
+  margin-right: .3rem;
+}
+
+section .box .nei b img {
+  width: 3.86rem;
+  height: 3.51rem;
+}
+
+section .box .nei span {
+  line-height: .61rem;
+  display: flex;
+  flex-direction: column;
+}
+
+section .box .nei span i {
+  font-size: 0.1rem !important;
+}
+
+section .box .nei span em {
+  font-size: 0.1rem !important;
+}
+
+section .box .nei span h4 {
+  font-weight: normal;
+  font-size: 0.1rem !important;
 }

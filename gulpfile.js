@@ -12,10 +12,22 @@ var server=require("gulp-webserver");//起服务
 
 var data=require("./src/data/data.json");
 
-gulp.task("default",["mincss","htmlmin","minjs","server"]);//默认执行代码
+var sequence=require("gulp-sequence");
+
+var clean=require("gulp-clean");
+
+
+gulp.task("default",function(callback){
+    sequence("clean",["mincss","htmlmin","minjs"],"watch","server",callback)//设置任务的执行顺序
+})//默认执行代码
+
+gulp.task("clean",function(){
+   return gulp.src("disk")
+    .pipe(clean())
+})
 
 gulp.task("mincss",function(){
-    gulp.src("./src/css/*.scss")
+   return gulp.src("./src/css/*.scss")
     .pipe(sass())
     .pipe(mincss())
     .pipe(gulp.dest("disk/css"))
@@ -32,19 +44,26 @@ var options = {
     // minifyCSS: true //压缩页面CSS
 };
 gulp.task("htmlmin",function(){
-    gulp.src("./src/*.html")
+   return gulp.src("./src/*.html")
     .pipe(htmlmin(options))
     .pipe(gulp.dest("disk"))
 })
 
+gulp.task("copyjs",function(){
+   return gulp.src("src/js/*.js")
+    .pipe(gulp.dest("disk/js"))
+})
+
 gulp.task("minjs",function(){
-    gulp.src("./src/js/*.js")
+   return gulp.src("./src/js/demo.js")
     .pipe(uglify())
     .pipe(gulp.dest("disk/js"))
 })
 
 gulp.task("watch",function(){
-    
+    gulp.watch("src/*.html",["htmlmin"])
+    gulp.watch("src/css/*.scss",["mincss"])
+    gulp.watch("src/js/*.js",['minjs'])
 })
 
 gulp.task("server",function(){
@@ -53,9 +72,11 @@ gulp.task("server",function(){
          port:8080,
          open:true,
          livereload:true,
-         host:"192.168.43.254",
+         host:"localhost",
          middleware:function(req,res,next){
-             res.end(JSON.stringify(data));
+             if(/\/list/g.test(req.url)){
+                res.end(JSON.stringify(data))
+             } 
              next()
          }
     }))
